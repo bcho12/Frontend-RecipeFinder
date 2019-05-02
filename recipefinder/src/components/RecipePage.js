@@ -1,18 +1,27 @@
 import React, { Component } from 'react'
-// import { Redirect } from 'react-router'
+import { withRouter } from 'react-router'
 // import Header from './Header'
 // import BodyContainer from './BodyContainer'
 
 class RecipePage extends Component {
 
 	  render() {
-	      return (
-	        <div>
-	         Hi
-	        </div>
-	      )
-	    }
+			console.log(this.props.recipeItem)
+			if (this.props.recipeItem != null) {
+		      return (
+		        <div>
+		         Hi
+		        </div>
+		      )
+				} else {
+					return (
+						<div>
+						 No props bruh
+						</div>
+					)
+			}
 	  }
+	}
 
 
-export default RecipePage
+export default withRouter(RecipePage)

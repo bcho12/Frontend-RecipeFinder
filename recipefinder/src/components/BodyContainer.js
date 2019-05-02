@@ -4,22 +4,10 @@ import CardContainer from './CardContainer'
 
 class BodyContainer extends Component {
 
-  state = {
-		recipeItems: []
-  }
-
-	componentDidMount() {
-		fetch(`http://localhost:3000/fetch`)
-			.then(response => response.json())
-			.then(data => this.setState({
-				recipeItems: data.results
-			}))
-	}
-
 	  render() {
 	      return (
-	        <div>
-	          <CardContainer recipeItems={this.state.recipeItems}/>
+	        <div className="body-container">
+	          <CardContainer recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
 						<Favorites />
 	        </div>
 	      )

@@ -80,7 +80,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, withRouter, Redirect } from 'react-router-dom';
 import Login from './components/Login.js'
 // import SignUp from './components/Signup.js'
 import Home from './components/Home.js'
@@ -92,17 +92,67 @@ const Title = () => <h1 className="title">Recipe Finder</h1>
 
 class App extends Component {
 
+	state = {
+		currentUserId: null,
+		userInfo: null,
+		recipeItems: [],
+		recipeItem: null
+  }
+
+	componentDidMount() {
+		fetch(`http://localhost:3000/fetch`)
+			.then(response => response.json())
+			.then(data => this.setState({
+				recipeItems: data.results
+			}))
+	}
+
+	renderRecipeAttributes = (recipe) => {
+	  // put the currentRecipe in app State and set it based on recipe argument
+		// use Redirect or history.push from react router to go to the '/recipes' path
+		this.setState({
+			recipeItem: recipe
+		},() => {
+			this.props.history.push('/recipepage')
+			// console.log(this.state.recipeItem)
+	})
+		// <Redirect to="/recipepage" />
+		// {this.state.recipeItem != null ? <Redirect to="/recipepage" /> : null}
+		// <Redirect push to="/recipepage" />
+	}
+
+	setCurrentUser = (user_id) => {
+		this.setState({
+			currentUserId: user_id
+		})
+	}
+
+	setUserInfo = (data) => {
+		this.setState({
+			userInfo: data
+		})
+	}
+
+
+
 	render() {
 	    return (
 	      <Router>
 					<Title />
-					<Route exact path='/login' component={Login} />
-					<Route exact path='/home' component={Home} />
-					<Route exact path='/recipes/:id' component={RecipePage} />
+					<Route exact path='/login' render={(props) => (<Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+					<Route exact path="/home"
+											render={(props) => (<Home {...props} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes} />)} />
+					<Route exact path='/recipepage'
+											render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
 				</Router>
 			)
 	}
 }
+
+
+
+// <Route exact path='/home' component={Home} />
+
 // render() {
 // 		return (
 // 			<div id='app-container'>
@@ -121,7 +171,7 @@ class App extends Component {
 
 
 
-export default App;
+export default withRouter(App);
 
 
 // render() {

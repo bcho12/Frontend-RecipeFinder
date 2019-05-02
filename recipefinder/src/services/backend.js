@@ -19,7 +19,7 @@ export const addNewUser = (name, password) => {
             },
             body: JSON.stringify({
                 username: name,
-                password_digest: password
+                password: password
             })
         }).then(res => res.json())
     }

@@ -35,41 +35,64 @@ class Login extends Component {
         })
     }
 
-    handleSubmit = event => {
-        event.preventDefault();
-        addNewUser(this.state.newName, this.state.newPassword)
-            .then(getAuthToken({ username: this.state.newName, password_digest: this.state.newPassword }))
+    // handleSubmit = event => {
+    //     event.preventDefault();
+    //     addNewUser(this.state.newName, this.state.newPassword)
+    //         .then(getAuthToken({ username: this.state.newName, password: this.state.newPassword }))
+    //         .then(payload => {
+    //             if (payload.user) {
+    //                 localStorage.setItem('token', payload.jwt)
+		// 								this.props.history.push('/home')
+		// 								this.props.setCurrentUser(payload.user.id)
+    //                 getUserInfo(payload.user.id)
+    //                     .then(data => this.props.setUserInfo(data))
+		// 								console.log('Success')
+    //             } else {
+    //                 alert('That username is already taken!')
+    //             }
+    //         })
+    //     this.setState({
+    //         newName: '',
+    //         newPassword: ''
+    //     })
+    // }
+
+		handleSubmit = (event) => {
+      event.preventDefault()
+			addNewUser(this.state.newName, this.state.newPassword)
+      .then(res => {
+         if (res.errors) {
+            alert("sorry, username has already been taken")
+         } else {
+            getAuthToken({ username: this.state.newName, password: this.state.newPassword})
             .then(payload => {
-                if (payload.user) {
-                    localStorage.setItem('token', payload.jwt)
-                    // getUserInfo(payload.user.id)
-                        // .then(data => this.props.setUserInfo(data))
-                    // this.props.changeLogin(true)
-										console.log('Success')
-                } else {
-                    alert('That username is already taken!')
-                }
-            })
-        this.setState({
-            newName: '',
-            newPassword: ''
-        })
-    }
+               localStorage.setItem('token', payload.jwt)
+               this.props.history.push('/home')
+               this.props.setCurrentUser(payload.user.id)
+               })
+            .then(this.setState({
+               newName: '',
+               newPassword: ''
+            }))
+         }
+      })
+   }
 
     handleLogin = event => {
 			// this.setState({
 			// 	loggedin: true
 			// })
         event.preventDefault();
-        getAuthToken({ user: { username: this.state.name, password_digest: this.state.password }})
+        getAuthToken({ username: this.state.name, password: this.state.password })
             .then(payload => {
                 if (payload.user) {
                     localStorage.setItem('token', payload.jwt);
-										this.props.history.push('/');
+										this.props.history.push('/home');
+										this.props.setCurrentUser(payload.user.id)
                     getUserInfo(payload.user.id)
-                        // .then(data => this.props.setUserInfo(data) && getFavorites(data.id))
+                        .then(data => this.props.setUserInfo(data))
                         // .then(data => this.props.addToFavorites(data.tastes))
-                    this.props.changeLogin(true)
+                    // this.props.changeLogin(true)
             } else {
                 alert("Invalid login!")
             }
@@ -77,8 +100,7 @@ class Login extends Component {
     }
 
   render() {
-		console.log(this.state)
-		if (this.state.loggedin === false) {
+		// console.log(this.state)
       return (
         <div className="login-container">
           <div className="login-form">
@@ -106,12 +128,6 @@ class Login extends Component {
         </div>
         </div>
       )
-		}
-		else {
-			return (
-				(<Redirect to="/home" />)
-			)
-		}
     }
   }
 

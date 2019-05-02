@@ -5,17 +5,11 @@ import BodyContainer from './BodyContainer'
 
 class Home extends Component {
 
-  state = {
-		header: "Hi",
-		bodycontainer: "Bye"
-    // favoriteId: null
-  }
-
 	  render() {
 	      return (
 	        <div>
 	          <Header />
-						<BodyContainer />
+						<BodyContainer recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
 	        </div>
 	      )
 	    }
