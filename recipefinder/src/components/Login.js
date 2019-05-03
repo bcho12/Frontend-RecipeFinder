@@ -4,6 +4,7 @@ import '../index.css';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
 import { getAuthToken, addNewUser, getUserInfo } from '../services/backend';
+import Title from './Title';
 
 class Login extends Component {
 
@@ -102,31 +103,34 @@ class Login extends Component {
   render() {
 		// console.log(this.state)
       return (
-        <div className="login-container">
-          <div className="login-form">
-          <Form onSubmit={this.handleLogin}>
-            <Form.Group controlId="formBasicName">
-              <Form.Label>Login</Form.Label>
-              <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
-							<Form.Control type="text" placeholder="Password" name="password" onChange={this.handleChange} />
-              <br />
-              <Button variant="primary" type="submit">Login</Button>
-            </Form.Group>
-          </Form>
-          </div>
+				<div className=".loginPage">
+					<Title />
+	        <div className="login-container">
+	          <div className="login-form">
+	          <Form onSubmit={this.handleLogin}>
+	            <Form.Group controlId="formBasicName">
+	              <Form.Label>Login</Form.Label>
+	              <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
+								<Form.Control type="text" placeholder="Password" name="password" onChange={this.handleChange} />
+	              <br />
+	              <Button variant="primary" type="submit">Login</Button>
+	            </Form.Group>
+	          </Form>
+	          </div>
 
-        <div className="signup-form">
-          <Form onSubmit={this.handleSubmit}>
-          <Form.Group controlId="formBasicSignUp">
-            <Form.Label>Sign Up</Form.Label>
-            <Form.Control type="text" placeholder="Name" name="newName" onChange={this.handleChange} />
-						<Form.Control type="text" placeholder="Password" name="newPassword" onChange={this.handleChange} />
-            <br />
-            <Button variant="primary" type="submit">Sign Up</Button>
-          </Form.Group>
-        </Form>
-        </div>
-        </div>
+	        <div className="signup-form">
+	          <Form onSubmit={this.handleSubmit}>
+	          <Form.Group controlId="formBasicSignUp">
+	            <Form.Label>Sign Up</Form.Label>
+	            <Form.Control type="text" placeholder="Name" name="newName" onChange={this.handleChange} />
+							<Form.Control type="text" placeholder="Password" name="newPassword" onChange={this.handleChange} />
+	            <br />
+	            <Button variant="primary" type="submit">Sign Up</Button>
+	          </Form.Group>
+	        </Form>
+	        </div>
+	      </div>
+			</div>
       )
     }
   }

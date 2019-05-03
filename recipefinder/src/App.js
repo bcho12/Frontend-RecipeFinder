@@ -80,7 +80,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, withRouter, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, withRouter} from 'react-router-dom';
 import Login from './components/Login.js'
 // import SignUp from './components/Signup.js'
 import Home from './components/Home.js'
@@ -91,13 +91,16 @@ import './index.css';
 const Title = () => <h1 className="title">Recipe Finder</h1>
 
 class App extends Component {
+	// constructor(props){
+		// super(props)
+		state = {
+			currentUserId: null,
+			userInfo: null,
+			recipeItems: [],
+			recipeItem: null
+	  }
+	// }
 
-	state = {
-		currentUserId: null,
-		userInfo: null,
-		recipeItems: [],
-		recipeItem: null
-  }
 
 	componentDidMount() {
 		fetch(`http://localhost:3000/fetch`)
@@ -137,14 +140,13 @@ class App extends Component {
 
 	render() {
 	    return (
-	      <Router>
-					<Title />
+	      <Switch>
 					<Route exact path='/login' render={(props) => (<Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path="/home"
 											render={(props) => (<Home {...props} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes} />)} />
 					<Route exact path='/recipepage'
 											render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
-				</Router>
+				</Switch>
 			)
 	}
 }
@@ -172,6 +174,7 @@ class App extends Component {
 
 
 export default withRouter(App);
+// export default App;
 
 
 // render() {

@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 
-class CardHeader extends Component {
+class RecipeHeader extends Component {
   render() {
     return (
-      <div className="card-header">
+      <div className="recipe-header">
 				Recipe Search
 			</div>
 		)
 	}
 }
 
-export default CardHeader
+export default RecipeHeader
