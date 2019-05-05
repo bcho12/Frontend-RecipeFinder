@@ -4,6 +4,7 @@ import Header from './Header'
 import BodyContainer from './BodyContainer'
 import Title from './Title';
 
+
 class Home extends Component {
 
 	  render() {
@@ -11,7 +12,7 @@ class Home extends Component {
 	        <div>
 						<Title />
 	          <Header />
-						<BodyContainer recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
+						<BodyContainer handleSearch={this.props.handleSearch} handlePageNumber={this.props.handlePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
 	        </div>
 	      )
 	    }

@@ -76,28 +76,30 @@
 
 
 
-
+// BrowserRouter as Router
 
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch, withRouter} from 'react-router-dom';
+import { Route, Switch, withRouter} from 'react-router-dom';
 import Login from './components/Login.js'
-// import SignUp from './components/Signup.js'
 import Home from './components/Home.js'
 import RecipePage from './components/RecipePage.js'
 import './index.css';
+import {fetchTitle} from './services/backend.js'
 
 
-const Title = () => <h1 className="title">Recipe Finder</h1>
-
+// const Title = () => <h1 className="title">Recipe Finder</h1
 class App extends Component {
 	// constructor(props){
 		// super(props)
+
 		state = {
 			currentUserId: null,
 			userInfo: null,
 			recipeItems: [],
-			recipeItem: null
+			recipeItem: null,
+			searchEntry: '',
+			pageNumber: 1
 	  }
 	// }
 
@@ -105,9 +107,13 @@ class App extends Component {
 	componentDidMount() {
 		fetch(`http://localhost:3000/fetch`)
 			.then(response => response.json())
-			.then(data => this.setState({
-				recipeItems: data.results
-			}))
+			.then(recipe => {
+				console.log(recipe)
+				this.setState({
+				recipeItems: recipe.results,
+				// pageNumber: 1
+			})
+		})
 	}
 
 	renderRecipeAttributes = (recipe) => {
@@ -136,14 +142,33 @@ class App extends Component {
 		})
 	}
 
+	handleSearch = (e) => {
+		// console.log(e.target.value)
+		this.setState({
+			searchEntry: e.target.value,
+		})
+		fetchTitle(e.target.value).then(data => {
+			this.setState({
+				recipeItems: data.results
+	    })
+		})
+  }
+
+	// handlePageNumber = () => {
+	// 	this.setState({
+	// 		// pageNumber: 2
+	// 	})
+	// 	fetchTitle(this.state.searchEntry, this.state.pageNumber)
+	// }
 
 
 	render() {
+		console.log(this.state)
 	    return (
 	      <Switch>
 					<Route exact path='/login' render={(props) => (<Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path="/home"
-											render={(props) => (<Home {...props} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes} />)} />
+											render={(props) => (<Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes} />)} />
 					<Route exact path='/recipepage'
 											render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
 				</Switch>

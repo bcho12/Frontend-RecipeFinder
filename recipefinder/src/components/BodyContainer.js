@@ -7,7 +7,7 @@ class BodyContainer extends Component {
 	  render() {
 	      return (
 	        <div className="body-container">
-	          <RecipeContainer recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
+	          <RecipeContainer handleSearch={this.props.handleSearch} handlePageNumber={this.props.handlePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
 						<Favorites />
 	        </div>
 	      )

@@ -1,6 +1,11 @@
-import React, { Component } from 'react'
-import RecipeCard from './RecipeCard'
+import React, { Component } from 'react';
+import RecipeCard from './RecipeCard';
+import { Search } from 'semantic-ui-react';
+import _ from 'lodash';
+import '../index.css';
 
+
+const Recipe = () => <h2 className="recipe">Recipes</h2>
 
 class CardContainer extends Component {
 
@@ -15,9 +20,11 @@ class CardContainer extends Component {
 	  render() {
 			return (
 	      <div className="card-container">
-					{this.props.recipeItems.map(r =>
+					<Recipe />
+					<Search />
+					{this.props.recipeItems.map((r, i) =>
 						<RecipeCard
-							recipeItem={r}
+							recipeItem={{...r, id: i + 1}}
 							renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
 	      </div>
     	)
@@ -25,3 +32,5 @@ class CardContainer extends Component {
 }
 
 export default CardContainer
+
+// <Search onSearchChange={_.debounce(this.props.handleSearch, 500)} showNoResults={false} />

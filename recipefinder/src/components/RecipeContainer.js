@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import CardContainer from './CardContainer'
-import RecipeHeader from './RecipeHeader'
+// import CardContainer from './CardContainer'
+import { Search, Input, Button } from 'semantic-ui-react'
+import '../index.css';
+import RecipeCard from './RecipeCard';
+// const Recipe = () => <h2 className="recipe">Recipes</h2>
 
 class RecipeContainer extends Component {
 
@@ -15,11 +18,25 @@ class RecipeContainer extends Component {
 	  render() {
 			return (
 	      <div className="recipe-container">
-					<RecipeHeader />
-					<CardContainer recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
+					Recipes
+					<Input onChange={(event) => this.props.handleSearch(event)} />
+						{this.props.recipeItems.map((r, i) =>
+							<RecipeCard
+								key={i}
+								recipeItem={r}
+								renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
+					<Button.Group>
+			    	<Button labelPosition='left' icon='left chevron' content='Previous' onClick={() => this.props.handlePageNumber()}/>
+						<Button labelPosition='right' icon='right chevron' content='Next' onClick={() => this.props.handlePageNumber()}/>
+					</Button.Group>
 	      </div>
     	)
 	  }
 }
 
 export default RecipeContainer
+
+// <Search onChange={(event) => this.props.handleSearch(event)} showNoResults={false}/>
+
+
+// <CardContainer onSearchChange={this.props.handleSearch} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />

@@ -58,7 +58,7 @@ class Login extends Component {
     //     })
     // }
 
-		handleSubmit = (event) => {
+		handleSignIn = (event) => {
       event.preventDefault()
 			addNewUser(this.state.newName, this.state.newPassword)
       .then(res => {
@@ -119,7 +119,7 @@ class Login extends Component {
 	          </div>
 
 	        <div className="signup-form">
-	          <Form onSubmit={this.handleSubmit}>
+	          <Form onSubmit={this.handleSignIn}>
 	          <Form.Group controlId="formBasicSignUp">
 	            <Form.Label>Sign Up</Form.Label>
 	            <Form.Control type="text" placeholder="Name" name="newName" onChange={this.handleChange} />

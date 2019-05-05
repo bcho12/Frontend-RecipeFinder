@@ -29,15 +29,16 @@ export const addNewUser = (name, password) => {
     }
 
 
-// export const fetchIngredients = (ingredient, pageNumber) => {
-// 	return fetch("http://localhost:3000/fetch", {
-// 		method: "GET",
-// 		headers: new Headers({
-// 			'ingredient': ingredient,
-// 			// 'pageNumber': pageNumber
-// 		})
-// 	}).then(res => res.json())
-// }
+export const fetchTitle = (title, pageNumber) => {
+	console.log(pageNumber)
+	return fetch("http://localhost:3000/fetch", {
+		method: "GET",
+		headers: new Headers({
+			'title': title,
+			'pageNumber': pageNumber
+		})
+	}).then(res => res.json())
+}
 
 // export const fetchTitle = (title) => {
 // 	return fetch("http://localhost:3000/fetch", {
