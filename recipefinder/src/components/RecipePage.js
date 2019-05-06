@@ -23,7 +23,6 @@ class RecipePage extends Component {
 					<br />
 					<br />
 					<br />
-					<br />
 					<NavLink to="/home">
 					<div className="btn-holder">
 						<Button variant="success">Back to Home</Button>

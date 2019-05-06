@@ -80,7 +80,7 @@
 
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Switch, withRouter} from 'react-router-dom';
+import { Route, Redirect, Switch, withRouter} from 'react-router-dom';
 import Login from './components/Login.js'
 import Home from './components/Home.js'
 import RecipePage from './components/RecipePage.js'
@@ -154,23 +154,26 @@ class App extends Component {
 		})
   }
 
-	// handlePageNumber = () => {
-	// 	this.setState({
-	// 		// pageNumber: 2
-	// 	})
-	// 	fetchTitle(this.state.searchEntry, this.state.pageNumber)
-	// }
+	handlePageNumber = () => {
+		this.setState({
+			pageNumber: this.state.pageNumber + 1
+		})
+		fetchTitle(this.state.searchEntry, this.state.pageNumber)
+	}
 
 
 	render() {
 		console.log(this.state)
 	    return (
 	      <Switch>
-					<Route exact path='/login' render={(props) => (<Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+					<Route exact path='/'
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+					<Route exact path='/login'
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path="/home"
-											render={(props) => (<Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes} />)} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/recipepage'
-											render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
+						render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
 				</Switch>
 			)
 	}
@@ -185,10 +188,10 @@ class App extends Component {
 // 			<div id='app-container'>
 // 					<Router>
 // 							<Switch>
-// 									<Route exact path='/login' render={(props) => {return !localStorage.getItem('token') ? <Login {...props} /> : <Redirect to='/' /> }} />
-// 									<Route exact path='/signup' render={(props) => {return !localStorage.getItem('token') ? <SignUp {...props} /> : <Redirect to='/' /> }} />
-// 									<Route exact path='/' render={(props) => {return localStorage.getItem('token') ? <Home {...props} /> : <Redirect to='/login' /> }} />
-// 									<Route exact path='/recipe' render={(props) => {return localStorage.getItem('token') ? <RecipePage {...props} /> : <Redirect to='/login' /> }} />
+// 									<Route exact path='/login' render={(props) => !localStorage.getItem('token') ? <Login {...props} /> : <Redirect to='/' /> } />
+// 									<Route exact path='/signup' render={(props) => !localStorage.getItem('token') ? <SignUp {...props} /> : <Redirect to='/' /> } />
+// 									<Route exact path='/' render={(props) => localStorage.getItem('token') ? <Home {...props} /> : <Redirect to='/login' /> } />
+// 									<Route exact path='/recipe' render={(props) => localStorage.getItem('token') ? <RecipePage {...props} /> : <Redirect to='/login' /> } />
 // 							</Switch>
 // 					</Router>
 // 			</div>

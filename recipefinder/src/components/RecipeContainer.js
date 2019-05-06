@@ -3,7 +3,8 @@ import React, { Component } from 'react'
 import { Search, Input, Button } from 'semantic-ui-react'
 import '../index.css';
 import RecipeCard from './RecipeCard';
-// const Recipe = () => <h2 className="recipe">Recipes</h2>
+
+const Recipe = () => <h2 className="recipe">Recipes</h2>
 
 class RecipeContainer extends Component {
 
@@ -18,13 +19,12 @@ class RecipeContainer extends Component {
 	  render() {
 			return (
 	      <div className="recipeContainer">
-					Recipes
-					<br />
+					<Recipe />
 					<br />
 					<Input onChange={(event) => this.props.handleSearch(event)} placeholder="Search Recipes"/>
 					<br />
 					<br />
-						<div className="recipeCard">
+						<div className="container recipeCard">
 						{this.props.recipeItems.map((r, i) =>
 								<RecipeCard
 									key={i}
@@ -32,8 +32,8 @@ class RecipeContainer extends Component {
 									renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
 						</div>
 					<Button.Group>
-			    	<Button labelPosition='left' icon='left chevron' content='Previous' onClick={() => this.props.handlePageNumber()}/>
-						<Button labelPosition='right' icon='right chevron' content='Next' onClick={() => this.props.handlePageNumber()}/>
+			    	<Button labelPosition='left' icon='left chevron' content='Previous' onClick={() => this.props.decreasePageNumber()}/>
+						<Button labelPosition='right' icon='right chevron' content='Next' onClick={() => this.props.increasePageNumber()}/>
 					</Button.Group>
 	      </div>
     	)
