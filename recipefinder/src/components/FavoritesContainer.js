@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import FavoritesCard from './FavoritesCard'
 
-class Favorites extends Component {
+class FavoritesContainer extends Component {
 
 	  render() {
 	      return (
-	        <div className="favorites-container">
-						"Favorites Container"
+	        <div className="favoritesContainer">
+						Favorites
 	          <FavoritesCard />
 	        </div>
 	      )
 	    }
 	  }
 
-export default Favorites
+export default FavoritesContainer

@@ -17,14 +17,20 @@ class RecipeContainer extends Component {
 
 	  render() {
 			return (
-	      <div className="recipe-container">
+	      <div className="recipeContainer">
 					Recipes
-					<Input onChange={(event) => this.props.handleSearch(event)} />
+					<br />
+					<br />
+					<Input onChange={(event) => this.props.handleSearch(event)} placeholder="Search Recipes"/>
+					<br />
+					<br />
+						<div className="recipeCard">
 						{this.props.recipeItems.map((r, i) =>
-							<RecipeCard
-								key={i}
-								recipeItem={r}
-								renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
+								<RecipeCard
+									key={i}
+									recipeItem={r}
+									renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
+						</div>
 					<Button.Group>
 			    	<Button labelPosition='left' icon='left chevron' content='Previous' onClick={() => this.props.handlePageNumber()}/>
 						<Button labelPosition='right' icon='right chevron' content='Next' onClick={() => this.props.handlePageNumber()}/>

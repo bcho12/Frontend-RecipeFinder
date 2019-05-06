@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Favorites from './Favorites'
+import FavoritesContainer from './FavoritesContainer'
 import RecipeContainer from './RecipeContainer'
 
 class BodyContainer extends Component {
 
 	  render() {
 	      return (
-	        <div className="body-container">
+	        <div className="bodyContainer">
 	          <RecipeContainer handleSearch={this.props.handleSearch} handlePageNumber={this.props.handlePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
-						<Favorites />
+						<FavoritesContainer />
 	        </div>
 	      )
 	    }

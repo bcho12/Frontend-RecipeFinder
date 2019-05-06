@@ -113,7 +113,7 @@ class Login extends Component {
 	              <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
 								<Form.Control type="text" placeholder="Password" name="password" onChange={this.handleChange} />
 	              <br />
-	              <Button variant="primary" type="submit">Login</Button>
+	              <Button variant="success" type="submit">Login</Button>
 	            </Form.Group>
 	          </Form>
 	          </div>
@@ -125,7 +125,7 @@ class Login extends Component {
 	            <Form.Control type="text" placeholder="Name" name="newName" onChange={this.handleChange} />
 							<Form.Control type="text" placeholder="Password" name="newPassword" onChange={this.handleChange} />
 	            <br />
-	            <Button variant="primary" type="submit">Sign Up</Button>
+	            <Button variant="success" type="submit">Sign Up</Button>
 	          </Form.Group>
 	        </Form>
 	        </div>
