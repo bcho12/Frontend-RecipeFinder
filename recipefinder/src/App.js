@@ -1,83 +1,3 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-// import Login from './components/Login.js'
-//
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-//
-// export default App;
-
-// import React, { Component } from 'react';
-// import { connect } from 'react-redux';
-
-// import LoginPage from './components/Login/LoginPage';
-// import MainPage from './components/Main/MainPage';
-
-// import './App.css';
-// import { fetchIngredients } from './services/backend.js'
-//
-// class App extends Component {
-//
-// 	handleSearch = (event) => {
-// 		fetchIngredients(event.target.value).then(console.log)
-// 	}
-//
-//   render() {
-// 			fetchIngredients().then(data => console.log(data))
-//    return (
-// 		<div>
-// 			<input onChange={(event) => this.handleSearch(event)}>
-// 			</input>
-// 	  </div>
-            // this.props.loginSuccess ?
-            //     <div className=‘App’>
-            //         <MainPage />
-            //     </div>
-            //     :
-            //     <div>
-            //         <LoginPage />
-            // </div>
-//    );
-//  }
-// }
-
-// const mapStateToProps = state => {
-//     return ({
-//         loginSuccess: state.loginSuccess
-//     })
-// }
-
-// export default connect()(App);
-// export default App;
-
-
-
-
-
-
-
-
-// BrowserRouter as Router
-
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Redirect, Switch, withRouter} from 'react-router-dom';
@@ -90,8 +10,6 @@ import {fetchTitle} from './services/backend.js'
 
 // const Title = () => <h1 className="title">Recipe Finder</h1
 class App extends Component {
-	// constructor(props){
-		// super(props)
 
 		state = {
 			currentUserId: null,
@@ -101,7 +19,6 @@ class App extends Component {
 			searchEntry: '',
 			pageNumber: 1
 	  }
-	// }
 
 
 	componentDidMount() {
@@ -122,8 +39,7 @@ class App extends Component {
 	}
 
 	renderRecipeAttributes = (recipe) => {
-	  // put the currentRecipe in app State and set it based on recipe argument
-		// use Redirect or history.push from react router to go to the '/recipes' path
+
 		this.setState({
 			recipeItem: recipe
 		},() => {
@@ -148,7 +64,6 @@ class App extends Component {
 	}
 
 	handleSearch = (e) => {
-		// console.log(e.target.value)
 		this.setState({
 			searchEntry: e.target.value,
 		})
@@ -184,7 +99,6 @@ class App extends Component {
 		})
 	}
 
-
 	render() {
 		console.log(this.state)
 	    return (
@@ -201,27 +115,6 @@ class App extends Component {
 			)
 	}
 }
-
-
-
-// <Route exact path='/home' component={Home} />
-
-// render() {
-// 		return (
-// 			<div id='app-container'>
-// 					<Router>
-// 							<Switch>
-// 									<Route exact path='/login' render={(props) => !localStorage.getItem('token') ? <Login {...props} /> : <Redirect to='/' /> } />
-// 									<Route exact path='/signup' render={(props) => !localStorage.getItem('token') ? <SignUp {...props} /> : <Redirect to='/' /> } />
-// 									<Route exact path='/' render={(props) => localStorage.getItem('token') ? <Home {...props} /> : <Redirect to='/login' /> } />
-// 									<Route exact path='/recipe' render={(props) => localStorage.getItem('token') ? <RecipePage {...props} /> : <Redirect to='/login' /> } />
-// 							</Switch>
-// 					</Router>
-// 			</div>
-// 		)
-// }
-// }
-
 
 
 export default withRouter(App);

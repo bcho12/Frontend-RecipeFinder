@@ -24,6 +24,7 @@ class CardContainer extends Component {
 					<Search />
 					{this.props.recipeItems.map((r, i) =>
 						<RecipeCard
+							handleFavorites={this.props.handleFavorites}
 							recipeItem={{...r, id: i + 1}}
 							renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
 	      </div>

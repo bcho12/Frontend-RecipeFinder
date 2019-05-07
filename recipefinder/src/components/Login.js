@@ -63,7 +63,7 @@ class Login extends Component {
 			addNewUser(this.state.newName, this.state.newPassword)
       .then(res => {
          if (res.errors) {
-            alert("sorry, username has already been taken")
+            alert("Sorry, the username has already been taken.")
          } else {
             getAuthToken({ username: this.state.newName, password: this.state.newPassword})
             .then(payload => {
@@ -80,9 +80,6 @@ class Login extends Component {
    }
 
     handleLogin = event => {
-			// this.setState({
-			// 	loggedin: true
-			// })
         event.preventDefault();
         getAuthToken({ username: this.state.name, password: this.state.password })
             .then(payload => {
@@ -107,21 +104,21 @@ class Login extends Component {
 					<Title />
 	        <div className="login-container">
 	          <div className="login-form">
-	          <Form onSubmit={this.handleLogin}>
-	            <Form.Group controlId="formBasicName">
-	              <Form.Label>Login</Form.Label>
-	              <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
-								<Form.Control type="text" placeholder="Password" name="password" onChange={this.handleChange} />
-	              <br />
-	              <Button variant="success" type="submit">Login</Button>
-	            </Form.Group>
-	          </Form>
+		          <Form onSubmit={this.handleLogin}>
+		            <Form.Group controlId="formBasicName">
+		              <Form.Label><h3>Login</h3></Form.Label>
+		              <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
+									<Form.Control type="text" placeholder="Password" name="password" onChange={this.handleChange} />
+		              <br />
+		              <Button variant="success" type="submit">Login</Button>
+		            </Form.Group>
+		          </Form>
 	          </div>
 
 	        <div className="signup-form">
 	          <Form onSubmit={this.handleSignIn}>
 	          <Form.Group controlId="formBasicSignUp">
-	            <Form.Label>Sign Up</Form.Label>
+	            <Form.Label><h3>Sign Up</h3></Form.Label>
 	            <Form.Control type="text" placeholder="Name" name="newName" onChange={this.handleChange} />
 							<Form.Control type="text" placeholder="Password" name="newPassword" onChange={this.handleChange} />
 	            <br />

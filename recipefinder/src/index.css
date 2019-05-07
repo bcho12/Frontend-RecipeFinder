@@ -36,7 +36,7 @@
 }
 
 .recipeContainer {
-  background-color: white;
+  background-color: rgb(218,245,204);
   width: 107%;
   height: 600px;
   border: 10px solid black;
@@ -48,7 +48,7 @@
 }
 
 .favoritesContainer {
-  background-color: white;
+  background-color: rgb(218,245,204);
   width: 30%;
   border: 10px solid black;
   padding: 40px;
@@ -63,15 +63,15 @@
 }
 
 .login-form {
-  background-color: white;
+  background-color: rgb(218,245,204);
   width: 500px;
   border: 15px solid black;
   padding: 80px;
-  margin: 100px 100px 100px 110px;
+  margin: 100px 100px 100px 150px;
 }
 
 .signup-form {
-  background-color: white;
+  background-color: rgb(218,245,204);
   width: 500px;
   border: 15px solid black;
   padding: 80px;
@@ -79,7 +79,7 @@
 }
 
 .recipePage {
-	background-color: white;
+	background-color: rgb(218,245,204);
   width: 60%;
   height: 600px;
   border: 10px solid black;
@@ -97,15 +97,15 @@
 }
 
 .btn-holder {
-	justify-content: flex-end;
-  display: flex;
+	position: relative;
+	text-align: right;
+	top: 40px;
+	right: 10px;
 }
 
 .eachCard {
 	margin: 5px 5px 5px 5px ;
 	width: 165px;
-
-	/* border: solid black; */
 }
 
 code {
