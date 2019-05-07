@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RecipeCard from './RecipeCard';
 import { Search } from 'semantic-ui-react';
-import _ from 'lodash';
+// import _ from 'lodash';
 import '../index.css';
 
 

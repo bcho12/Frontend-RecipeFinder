@@ -29,7 +29,7 @@ export const addNewUser = (name, password) => {
     }
 
 
-export const fetchTitle = (title, pageNumber) => {
+export const fetchTitle = (title, pageNumber=1) => {
 	console.log(pageNumber)
 	return fetch("http://localhost:3000/fetch", {
 		method: "GET",

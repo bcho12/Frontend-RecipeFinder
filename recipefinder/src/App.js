@@ -105,13 +105,18 @@ class App extends Component {
 
 
 	componentDidMount() {
-		fetch(`http://localhost:3000/fetch`)
+		fetch(`http://localhost:3000/fetch`, {
+			method: "GET",
+			headers: new Headers({
+				'title': "",
+				'pageNumber': 1
+		})})
 			.then(response => response.json())
 			.then(recipe => {
 				console.log(recipe)
 				this.setState({
 				recipeItems: recipe.results,
-				// pageNumber: 1
+				pageNumber: 1
 			})
 		})
 	}
@@ -154,11 +159,29 @@ class App extends Component {
 		})
   }
 
-	handlePageNumber = () => {
+	decreasePageNumber = () => {
+		this.setState({
+			pageNumber: this.state.pageNumber - 1
+		}, () =>{
+			console.log("pagenumber",this.state.pageNumber)
+
+			fetchTitle(this.state.searchEntry, this.state.pageNumber).then(data => {
+				this.setState({
+					recipeItems: data.results
+		    })})
+		} )
+	}
+
+	increasePageNumber = () => {
 		this.setState({
 			pageNumber: this.state.pageNumber + 1
+		}, () => {
+			console.log("pagenumber",this.state.pageNumber)
+			fetchTitle(this.state.searchEntry, this.state.pageNumber).then(data => {
+				this.setState({
+					recipeItems: data.results
+		    })})
 		})
-		fetchTitle(this.state.searchEntry, this.state.pageNumber)
 	}
 
 
@@ -167,11 +190,11 @@ class App extends Component {
 	    return (
 	      <Switch>
 					<Route exact path='/'
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/login'
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path="/home"
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} handlePageNumber={this.handlePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/recipepage'
 						render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
 				</Switch>
