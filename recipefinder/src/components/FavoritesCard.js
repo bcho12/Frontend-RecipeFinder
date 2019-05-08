@@ -5,7 +5,7 @@ class FavoritesCard extends Component {
 	  render() {
 	      return (
 	        <div>
-	          "Favorites Card"
+	          <button>Delete</button>
 	        </div>
 	      )
 	    }

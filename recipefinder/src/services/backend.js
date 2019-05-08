@@ -40,6 +40,21 @@ export const fetchTitle = (title, pageNumber=1) => {
 	}).then(res => res.json())
 }
 
+export const postFavorite = (recipeItem, userId) => {
+	return fetch(`http://localhost:3000/recipes`, {
+		method: "POST",
+		headers: {
+			 "Content-Type": "application/json",
+			 "Authorization": localStorage.getItem('token')
+		},
+		body: JSON.stringify({
+			 title: recipeItem.title,
+			 thumbnail: recipeItem.thumbnail,
+			 user_id: userId
+		})
+ }).then(res => res.json())
+}
+
 // export const fetchTitle = (title) => {
 // 	return fetch("http://localhost:3000/fetch", {
 // 		method: "GET",

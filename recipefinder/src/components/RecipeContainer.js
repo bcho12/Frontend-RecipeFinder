@@ -29,6 +29,7 @@ class RecipeContainer extends Component {
 								<RecipeCard
 									key={i}
 									recipeItem={r}
+									handleFavorites={this.props.handleFavorites}
 									renderRecipeAttributes={this.props.renderRecipeAttributes} />)}
 						</div>
 					<Button.Group>

@@ -5,7 +5,7 @@ import Login from './components/Login.js'
 import Home from './components/Home.js'
 import RecipePage from './components/RecipePage.js'
 import './index.css';
-import {fetchTitle} from './services/backend.js'
+import {fetchTitle, postFavorite} from './services/backend.js'
 
 
 // const Title = () => <h1 className="title">Recipe Finder</h1
@@ -17,7 +17,8 @@ class App extends Component {
 			recipeItems: [],
 			recipeItem: null,
 			searchEntry: '',
-			pageNumber: 1
+			pageNumber: 1,
+			userFavorites: []
 	  }
 
 
@@ -30,7 +31,6 @@ class App extends Component {
 		})})
 			.then(response => response.json())
 			.then(recipe => {
-				console.log(recipe)
 				this.setState({
 				recipeItems: recipe.results,
 				pageNumber: 1
@@ -78,7 +78,6 @@ class App extends Component {
 		this.setState({
 			pageNumber: this.state.pageNumber - 1
 		}, () =>{
-			console.log("pagenumber",this.state.pageNumber)
 
 			fetchTitle(this.state.searchEntry, this.state.pageNumber).then(data => {
 				this.setState({
@@ -91,7 +90,6 @@ class App extends Component {
 		this.setState({
 			pageNumber: this.state.pageNumber + 1
 		}, () => {
-			console.log("pagenumber",this.state.pageNumber)
 			fetchTitle(this.state.searchEntry, this.state.pageNumber).then(data => {
 				this.setState({
 					recipeItems: data.results
@@ -99,16 +97,24 @@ class App extends Component {
 		})
 	}
 
+	handleFavorites = (recipeItem) => {
+		postFavorite(recipeItem, this.state.currentUserId)
+		.then(() => {
+			this.setState({
+				userFavorites: [...this.state.userFavorites, recipeItem]
+			})
+		})
+	}
+
 	render() {
-		console.log(this.state)
 	    return (
 	      <Switch>
 					<Route exact path='/'
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleFavorites={this.handleFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/login'
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleFavorites={this.handleFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path="/home"
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleFavorites={this.handleFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/recipepage'
 						render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
 				</Switch>

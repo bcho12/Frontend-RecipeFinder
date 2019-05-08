@@ -12,7 +12,7 @@ class Home extends Component {
 	        <div>
 						<Title />
 	          <Header />
-						<BodyContainer handleSearch={this.props.handleSearch} decreasePageNumber={this.props.decreasePageNumber} increasePageNumber={this.props.increasePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
+						<BodyContainer handleSearch={this.props.handleSearch} handleFavorites={this.props.handleFavorites} decreasePageNumber={this.props.decreasePageNumber} increasePageNumber={this.props.increasePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
 	        </div>
 	      )
 	    }

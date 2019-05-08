@@ -20,7 +20,7 @@ class RecipeCard extends Component {
   						<Card.Img variant="top" src={x} onClick={() => this.props.renderRecipeAttributes(this.props.recipeItem)}/>
   						<Card.Body>
     						<Card.Title onClick={() => this.props.renderRecipeAttributes(this.props.recipeItem)}>{this.props.recipeItem.title}</Card.Title>
-						    <Button variant="success" onClick={() => this.props.handleFavorites()}>Add to Favorites</Button>
+						    <Button variant="success" onClick={() => this.props.handleFavorites(this.props.recipeItem)}>Add to Favorites</Button>
 						  </Card.Body>
 						</Card>
 					</div>
