@@ -18,7 +18,7 @@ class RecipePage extends Component {
 					<br />
 					<h2>Ingredients: {this.props.recipeItem.ingredients}</h2>
 					<br />
-					<h2> <a href={this.props.recipeItem.href}>Instructions and Reviews</a> </h2>
+					<h2> <a href={this.props.recipeItem.href} target='_blank'>Instructions and Reviews</a> </h2>
 					<NavLink to="/home">
 					<div className="btn-holder">
 						<Button variant="success">Back to Home</Button>

@@ -8,6 +8,7 @@ class Header extends Component {
       <div className="header">
 				 <img src='https://static.thenounproject.com/png/630729-200.png' alt="My Profile" height="60px" />
 				 <br />
+				 	<h3>Hello {this.props.username}</h3>
 					<Link to='/login' onClick={() => localStorage.clear()}>
 						<Button className="logout" variant="success">Logout</Button>
 					</Link>

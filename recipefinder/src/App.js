@@ -18,7 +18,8 @@ class App extends Component {
 			recipeItem: null,
 			searchEntry: '',
 			pageNumber: 1,
-			userFavorites: []
+			userFavorites: [],
+			username: ''
 	  }
 
 
@@ -60,6 +61,12 @@ class App extends Component {
 	setUserInfo = (data) => {
 		this.setState({
 			userInfo: data
+		})
+	}
+
+	setUserFavorites = (data) => {
+		this.setState({
+			userFavorites: data
 		})
 	}
 
@@ -106,15 +113,24 @@ class App extends Component {
 		})
 	}
 
+	sendUserName = (userName) => {
+		this.setState({
+			username: userName
+		})
+	}
+
 	render() {
 	    return (
 	      <Switch>
 					<Route exact path='/'
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleFavorites={this.handleFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} username={this.state.username} setUserFavorites={this.setUserFavorites} currentUserId={this.state.currentUserId} handleFavorites={this.handleFavorites} userFavorites={this.state.userFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> :
+																																<Login {...props} sendUserName={this.sendUserName} setCurrentUser={this.setCurrentUser} setUserFavorites={this.setUserFavorites} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/login'
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleFavorites={this.handleFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} username={this.state.username} setUserFavorites={this.setUserFavorites} currentUserId={this.state.currentUserId} handleFavorites={this.handleFavorites} userFavorites={this.state.userFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> :
+																																<Login {...props} sendUserName={this.sendUserName} setCurrentUser={this.setCurrentUser} setUserFavorites={this.setUserFavorites} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path="/home"
-						render={(props) => (localStorage.getItem('token') ? <Home {...props} handleFavorites={this.handleFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> : <Login {...props} setCurrentUser={this.setCurrentUser} setUserInfo={this.setUserInfo}/> )} />
+						render={(props) => (localStorage.getItem('token') ? <Home {...props} username={this.state.username} setUserFavorites={this.setUserFavorites} currentUserId={this.state.currentUserId} handleFavorites={this.handleFavorites} userFavorites={this.state.userFavorites} handleSearch={this.handleSearch} decreasePageNumber={this.decreasePageNumber} increasePageNumber={this.increasePageNumber} recipeItems={this.state.recipeItems} renderRecipeAttributes={this.renderRecipeAttributes}  /> :
+																																<Login {...props} sendUserName={this.sendUserName} setCurrentUser={this.setCurrentUser} setUserFavorites={this.setUserFavorites} setUserInfo={this.setUserInfo}/> )} />
 					<Route exact path='/recipepage'
 						render={(props) => (<RecipePage {...props} recipeItem={this.state.recipeItem} />)} />
 				</Switch>

@@ -50,11 +50,13 @@
 .favoritesContainer {
   background-color: rgb(218,245,204);
   width: 30%;
+	height: 600px;
   border: 10px solid black;
   padding: 40px;
   margin: 20px;
   text-align: center;
 	float: right;
+	overflow: scroll;
 }
 
 .login-container {

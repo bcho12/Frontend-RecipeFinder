@@ -3,7 +3,7 @@ import { Redirect } from 'react-router'
 import '../index.css';
 import { Form } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
-import { getAuthToken, addNewUser, getUserInfo } from '../services/backend';
+import { getAuthToken, addNewUser, getUserInfo, getFavorites } from '../services/backend';
 import Title from './Title';
 
 class Login extends Component {
@@ -84,21 +84,20 @@ class Login extends Component {
         getAuthToken({ username: this.state.name, password: this.state.password })
             .then(payload => {
                 if (payload.user) {
-                    localStorage.setItem('token', payload.jwt);
-										this.props.history.push('/home');
+                    localStorage.setItem('token', payload.jwt)
 										this.props.setCurrentUser(payload.user.id)
                     getUserInfo(payload.user.id)
-                        .then(data => this.props.setUserInfo(data))
-                        // .then(data => this.props.addToFavorites(data.tastes))
-                    // this.props.changeLogin(true)
-            } else {
-                alert("Invalid login!")
-            }
+                    .then(data => this.props.setUserInfo(data))
+										.then(() => this.props.history.push('/home'))
+										getFavorites(payload.user.id.toString())
+										.then(data => this.props.setUserFavorites(data.recipes))
+		            } else {
+		                alert("Invalid login!")
+		            }
         })
     }
 
   render() {
-		// console.log(this.state)
       return (
 				<div className=".loginPage">
 					<Title />
@@ -108,9 +107,9 @@ class Login extends Component {
 		            <Form.Group controlId="formBasicName">
 		              <Form.Label><h3>Login</h3></Form.Label>
 		              <Form.Control type="text" placeholder="Name" name="name" onChange={this.handleChange} />
-									<Form.Control type="text" placeholder="Password" name="password" onChange={this.handleChange} />
+									<Form.Control type="password" placeholder="Password" name="password" onChange={this.handleChange} />
 		              <br />
-		              <Button variant="success" type="submit">Login</Button>
+		              <Button variant="success" type="submit" onClick={() => this.props.sendUserName(this.state.name)}>Login</Button>
 		            </Form.Group>
 		          </Form>
 	          </div>
@@ -120,7 +119,7 @@ class Login extends Component {
 	          <Form.Group controlId="formBasicSignUp">
 	            <Form.Label><h3>Sign Up</h3></Form.Label>
 	            <Form.Control type="text" placeholder="Name" name="newName" onChange={this.handleChange} />
-							<Form.Control type="text" placeholder="Password" name="newPassword" onChange={this.handleChange} />
+							<Form.Control type="password" placeholder="Password" name="newPassword" onChange={this.handleChange} />
 	            <br />
 	            <Button variant="success" type="submit">Sign Up</Button>
 	          </Form.Group>

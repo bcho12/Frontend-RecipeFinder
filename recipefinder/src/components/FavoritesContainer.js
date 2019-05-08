@@ -9,10 +9,12 @@ class FavoritesContainer extends Component {
 	      return (
 	        <div className="favoritesContainer">
 						<Favorites />
-	          <FavoritesCard />
+						{this.props.userFavorites.map(uF => <FavoritesCard userFavorites={uF} setUserFavorites={this.props.setUserFavorites} currentUserId={this.props.currentUserId} />)}
 	        </div>
 	      )
 	    }
 	  }
 
 export default FavoritesContainer
+
+// <FavoritesCard userFavorites={this.props.userFavorites} />

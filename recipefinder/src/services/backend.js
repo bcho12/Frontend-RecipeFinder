@@ -55,6 +55,31 @@ export const postFavorite = (recipeItem, userId) => {
  }).then(res => res.json())
 }
 
+export const getFavorites = (user_id) => {
+   return fetch(`http://localhost:3000/users/${user_id}`, {
+      method: "GET",
+      headers: {
+         "Content-Type": "application/json",
+         "Authorization": localStorage.getItem('token')
+      }
+   }).then(res => res.json())
+}
+
+export const deleteFavorite = (user_id, recipe_id) => {
+   return fetch(`http://localhost:3000/removeFavorites`, {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem('token')
+      },
+      body: JSON.stringify({
+         user_id: user_id,
+         recipe_id: recipe_id
+      })
+   })
+	 console.log("inside deleteFavorite")
+}
+
 // export const fetchTitle = (title) => {
 // 	return fetch("http://localhost:3000/fetch", {
 // 		method: "GET",

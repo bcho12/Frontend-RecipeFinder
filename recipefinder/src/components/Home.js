@@ -11,8 +11,8 @@ class Home extends Component {
 	      return (
 	        <div>
 						<Title />
-	          <Header />
-						<BodyContainer handleSearch={this.props.handleSearch} handleFavorites={this.props.handleFavorites} decreasePageNumber={this.props.decreasePageNumber} increasePageNumber={this.props.increasePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
+	          <Header username={this.props.username}/>
+						<BodyContainer handleSearch={this.props.handleSearch} setUserFavorites={this.props.setUserFavorites} currentUserId={this.props.currentUserId} userFavorites={this.props.userFavorites} handleFavorites={this.props.handleFavorites} decreasePageNumber={this.props.decreasePageNumber} increasePageNumber={this.props.increasePageNumber} recipeItems={this.props.recipeItems} renderRecipeAttributes={this.props.renderRecipeAttributes} />
 	        </div>
 	      )
 	    }
